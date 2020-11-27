@@ -1,6 +1,7 @@
 use Mojolicious::Lite '-signatures';
 use Mojo::JSON 'encode_json';
 
+our $VERSION = '0.01';
 our $url;
 
 get '/' => sub($c) {
@@ -10,6 +11,7 @@ get '/' => sub($c) {
 get '/set' => sub( $c ) {
     if( my $url = $c->param('url')) {
         $url = $c->param('url');
+        warn "Set URL to <$url>";
         notify_clients({ src => $url });
     };
     $c->stash( url => $url );
@@ -19,6 +21,7 @@ get '/set' => sub( $c ) {
 post '/set' => sub($c) {
     $url = $c->param('url');
     $c->stash( url => $url );
+    warn "Set URL to <$url>";
     notify_clients({ src => $url });
 };
 
