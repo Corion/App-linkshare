@@ -64,7 +64,7 @@ __DATA__
 <input id="url" type="text" name="url" placeholder="http://example.com" value="<%= $url %>" />
 <input type="submit"/>
 </form>
-<a href="javascript:(function(){(new%20Image()).src='<%= $c->url_for('/set')->to_abs %>?url='+encodeURI(window.location.href)})">Bookmarklet for setting a link to the current page</a>
+<a href="javascript:void(new Image().src='<%= $c->url_for('/set')->to_abs %>?url='+encodeURIComponent(document.location))">Bookmarklet for setting a link to the current page</a>
 </body>
 </html>
 
