@@ -4,25 +4,27 @@ use Mojo::JSON 'encode_json';
 our $VERSION = '0.01';
 our $url;
 
+
+sub update_url( $newurl ) {
+    $url = $newurl;
+    notify_clients({ src => $url });
+}
+
 get '/' => sub($c) {
     return $c->redirect_to($url);
 };
 
 get '/set' => sub( $c ) {
     if( my $url = $c->param('url')) {
-        $url = $c->param('url');
-        warn "Set URL to <$url>";
-        notify_clients({ src => $url });
+        update_url( $url );
     };
     $c->stash( url => $url );
     $c->render( template => 'set');
 };
 
 post '/set' => sub($c) {
-    $url = $c->param('url');
+    update_url( $url );
     $c->stash( url => $url );
-    warn "Set URL to <$url>";
-    notify_clients({ src => $url });
 };
 
 get '/iframe' => sub( $c ) {
