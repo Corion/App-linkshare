@@ -1,12 +1,26 @@
 use Mojolicious::Lite '-signatures';
 use Mojo::JSON 'encode_json';
+use Mojo::File 'curfile', 'path';
 
 our $VERSION = '0.01';
 our $url;
 
+# we are running as CGI, so persist in a file
+our $is_cgi = defined $ENV{PATH_INFO} || defined $ENV{GATEWAY_INTERFACE};
+if( $is_cgi ) {
+    my $file = path(curfile->to_abs . '.state');
+    if( -r $file->to_abs ) {
+        $url = $file->slurp;
+        $url =~ s!\s+$!!;
+    };
+}
 
 sub update_url( $newurl ) {
     $url = $newurl;
+
+    if( $is_cgi ) {
+        path(curfile->to_abs . '.state')->spurt($url);
+    }
     notify_clients({ src => $url });
 }
 
