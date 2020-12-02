@@ -1,9 +1,41 @@
+#!perl
 use Mojolicious::Lite '-signatures';
 use Mojo::JSON 'encode_json';
 use Mojo::File 'curfile', 'path';
 
 our $VERSION = '0.01';
 our $url;
+
+=head1 NAME
+
+App::linkshare - simple link redirector
+
+=head1 USAGE
+
+Install this file as a CGI file or launch it as
+
+    server.pl daemon
+
+=head1 Available URLs
+
+    /set
+
+Form to set the target URL. This form also displays a Javascript bookmarklet
+you can use to set any page as the target URL without leaving it.
+
+    /
+
+Redirects to the target URL. Tell this URL to friends who have trouble typing
+longer URLs. Also, bookmark this URL on your phone to quickly share an URL from
+your desktop to your phone.
+
+    /iframe
+
+Sets up the target browser to always follow the target URL. You can use this
+to show and update the same HTML page on multiple browsers at the same time.
+This URL only works if you start the script stand-alone.
+
+=cut
 
 # we are running as CGI, so persist in a file
 our $is_cgi = defined $ENV{PATH_INFO} || defined $ENV{GATEWAY_INTERFACE};
