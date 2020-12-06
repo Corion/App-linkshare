@@ -1,0 +1,7 @@
+
+[![Travis Build Status](https://travis-ci.org/Corion/App-linkshare.svg?branch=master)](https://travis-ci.org/Corion/App-linkshare)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Corion/App-linkshare?branch=master&svg=true)](https://ci.appveyor.com/project/Corion/App-linkshare)
+
+# NAME
+
+App::linkshare - simple url shortener/redirector for a single link
