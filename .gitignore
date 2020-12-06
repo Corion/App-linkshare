@@ -13,4 +13,4 @@ MYMETA.*
 frame-*.png
 .prove
 .patch
-scripts/server.pl.state
+scripts/linkshare.pl.state
